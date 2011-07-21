@@ -13,3 +13,7 @@
   %tr
     %td.title= part.name
     %td.value= link_to(formatted_status(part.status), build_path(build, :stderr => build.status == Build::STATUS_OK ? nil : 1, :anchor => "part_#{index}"))
+- if build.has_cucumber_output?
+  %tr
+    %td.title Cucumber output
+    %td.value= link_to "Show cucumber output", build_path(build, :output => 'cucumber')

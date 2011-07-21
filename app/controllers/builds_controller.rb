@@ -1,9 +1,9 @@
 class BuildsController < ApplicationController
-  before_filter :locate_build, :only => [:show, :destroy]
+  before_filter :locate_build, :only => [:show, :destroy, :cucumber_output]
   respond_to :js, :only => :show
 
   def show
-
+    render :file => @build.cucumber_output_path if params[:output] == 'cucumber'
   end
 
   def destroy

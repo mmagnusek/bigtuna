@@ -84,6 +84,14 @@ class Build < ActiveRecord::Base
     project.truncate_builds!
   end
 
+  def has_cucumber_output?
+    File.exist?(cucumber_output_path)
+  end
+
+  def cucumber_output_path
+    [build_dir, "output.html"].join("/")
+  end
+
   private
   def remove_build_dir
     if project.fetch_type == :clone
