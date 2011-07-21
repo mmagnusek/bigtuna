@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem "rails", "3.0.3"
 gem "sqlite3-ruby"
 gem "haml"
-gem "delayed_job"
+gem "delayed_job", "~> 2.1.4"
 gem "stringex"
 gem "open4"
 gem "json"
