@@ -3,7 +3,7 @@ class BuildsController < ApplicationController
   respond_to :js, :only => :show
 
   def show
-    render :file => @build.cucumber_output_path if params[:output] == 'cucumber'
+    render :file => @build.cucumber_output_path, :layout => false if params[:output] == 'cucumber'
   end
 
   def destroy
