@@ -1,11 +1,11 @@
+require 'delayed/command'
+
 Delayed::Worker.max_attempts = 1
 
 DELAYED_JOB_PID_PATH = "#{Rails.root}/tmp/pids/delayed_job.pid"
 
 def start_delayed_job
-  Thread.new do
-    `ruby script/delayed_job start`
-  end
+  Delayed::Command.new(['start']).daemonize
 end
 
 def daemon_is_running?
