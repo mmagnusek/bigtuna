@@ -59,7 +59,11 @@ class HooksController < ApplicationController
 
   private
   def trigger_and_respond(project)
-    project.build!
-    render :text => "build for %p triggered" % [project.name], :status => 200
+    unless project.vcs.remote_head_commit == project.builds.last.commit
+      project.build!
+      render :text => "build for %p triggered" % [project.name], :status => 200
+    else
+      render :text => "nothing new for %p" % [project.name], :status => 200
+    end
   end
 end

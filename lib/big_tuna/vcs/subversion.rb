@@ -35,6 +35,16 @@ module BigTuna::VCS
       [info, command]
     end
 
+    def remote_head_commit
+      begin
+        command = "svn log -l 1 #{source}"
+        output = BigTuna::Runner.execute(Dir.pwd, command)
+      rescue BigTuna::Runner::Error => e
+        raise BigTuna::VCS::Error.new("Couldn't access repository log")
+      end
+      output.stdout[1].split("\|").first.strip
+    end
+
     def clone(where_to)
       command = "svn checkout #{source} #{where_to}"
       BigTuna::Runner.execute(Dir.pwd, command)
