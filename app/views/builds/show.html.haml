@@ -12,5 +12,6 @@
   - unless BigTuna.read_only?
     %li= link_to("Build now", build_project_path(@build.project), :class => "black_button")
   %li= link_to("Feed", feed_project_path(@build.project)+".atom", :class => "rss")
-  %li= link_to "Cucumber", build_path(@build, :output => 'cucumber'), :class => "black_button" if @build.has_cucumber_output?
+  %li= link_to "Cucumber", build_path(@build, :output => 'cucumber'), :class => "black_button" if @build.has_output? :cucumber
+  %li= link_to "RSpec", build_path(@build, :output => 'rspec'), :class => "black_button" if @build.has_output? :rspec
   
