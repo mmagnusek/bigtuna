@@ -84,12 +84,12 @@ class Build < ActiveRecord::Base
     project.truncate_builds!
   end
 
-  def has_cucumber_output?
-    File.exist?(cucumber_output_path)
+  def has_output?(type)
+    File.exist?(output_path(type))
   end
 
-  def cucumber_output_path
-    [build_dir, "output.html"].join("/")
+  def output_path(type)
+    [build_dir, "#{type}_output.html"].join("/")
   end
 
   private

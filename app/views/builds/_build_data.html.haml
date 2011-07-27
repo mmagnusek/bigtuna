@@ -13,7 +13,9 @@
   %tr
     %td.title= part.name
     %td.value= link_to(formatted_status(part.status), build_path(build, :stderr => build.status == Build::STATUS_OK ? nil : 1, :anchor => "part_#{index}"))
-- if build.has_cucumber_output?
+- if build.has_output?(:cucumber) || build.has_output?(:rspec)
   %tr
-    %td.title Cucumber output
-    %td.value= link_to "Show cucumber output", build_path(build, :output => 'cucumber')
+    %td.title Outputs
+    %td.value
+      = link_to "Cucumber output", build_path(build, :output => 'cucumber') if build.has_output? :cucumber
+      = link_to "Rspec output", build_path(build, :output => 'rspec') if build.has_output? :rspec
