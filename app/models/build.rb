@@ -51,7 +51,7 @@ class Build < ActiveRecord::Base
   end
 
   def commit_data?
-    self.author && self.email && self.commit_message && self.committed_at && self.commit
+    self.author && self.commit_message && self.committed_at && self.commit
   end
 
   def finished?
