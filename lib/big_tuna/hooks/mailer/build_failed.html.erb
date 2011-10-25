@@ -1,11 +1,11 @@
 <html>
 <body>
 	<h3>
-		The build for project <%= @project.name %> still fails!
+		The build for project <%= @project.name %> failed!
 	</h3>
 
 	<p>
-		Commit that didn't fix the build: <br/>
+		Commit that failed the build: <br/>
 		<b>Hash:</b> <%= @build.display_name %> <br/>
 		<b>Author:</b> <%= @build.author %> <<%= @build.email %>> <br/>
 		<b>Message:</b> <%= @build.commit_message %> <br/>

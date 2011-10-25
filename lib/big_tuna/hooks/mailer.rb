@@ -25,30 +25,49 @@ module BigTuna
         @build_url = "http://ci.cloud.polarion.com/builds/#{build.to_param}"
       end
 
-      def build_failed(build, recipients)
-        @build = build
-        @project = @build.project
-        mail(:to => recipients, :subject => "Build '#{@build.display_name}' in '#{@project.name}' failed") do |format|
-          format.text { render "mailer/build_failed" }
+      def cucumber_build_output(build)
+        doc = Nokogiri::HTML(open(build.output_path('cucumber')))
+        output = ""
+        doc.css('.step.failed').each do |step|
+          output << step.parent.parent.to_s
         end
-      end
+        output
+      end 
 
-      def build_still_fails(build, recipients)
+      def rspec_build_output(build)
+        doc = Nokogiri::HTML(open(build.output_path('rspec')))
+        output = ""
+        doc.css('dd.failed').each do |step|
+          output << step.parent.parent.to_s
+        end
+        output
+      end
+      
+      def setup_data(build)
         @build = build
         @build_url = link_to_build(build)
         @project = @build.project
-        # @cucumber = File.read(build.output_path('cucumber'))
-        # @rspec = File.read(build.output_path('rspec'))
-        mail(:to => recipients, :subject => "Build '#{@build.display_name}' in '#{@project.name}' still fails") do |format|
-          format.text { render "mailer/build_still_fails" }
-        end
+        @cucumber_output = cucumber_build_output(@build)
+        @rspec_output = rspec_build_output(@build)
       end
 
+      def build_failed(build, recipients)
+        setup_data(build)
+        mail(:to => recipients, :subject => "Build '#{@build.display_name}' in '#{@project.name}' failed") do |format|
+          format.html { render "mailer/build_failed" }
+        end     
+      end
+
+      def build_still_fails(build, recipients)
+        setup_data(build)
+        mail(:to => recipients, :subject => "Build '#{@build.display_name}' in '#{@project.name}' still fails") do |format|
+          format.html { render "mailer/build_still_fails" }
+      end
+      
       def build_fixed(build, recipients)
-        @build = build
-        @project = @build.project
+        setup_data(build)
         mail(:to => recipients, :subject => "Build '#{@build.display_name}' in '#{@project.name}' fixed") do |format|
-          format.text { render "mailer/build_fixed" }
+          format.html { render "mailer/build_fixed" }
         end
       end
     end
