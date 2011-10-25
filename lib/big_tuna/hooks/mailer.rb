@@ -32,6 +32,8 @@ module BigTuna
       def build_still_fails(build, recipients)
         @build = build
         @project = @build.project
+        attachments['cucumber.html'] = File.read(build.output_path('cucumber'))
+        attachments['rspec.html'] = File.read(build.output_path('rspec'))
         mail(:to => recipients, :subject => "Build '#{@build.display_name}' in '#{@project.name}' still fails") do |format|
           format.text { render "mailer/build_still_fails" }
         end
