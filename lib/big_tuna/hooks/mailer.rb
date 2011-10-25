@@ -20,6 +20,10 @@ module BigTuna
     class Sender < ActionMailer::Base
       self.append_view_path("lib/big_tuna/hooks")
       default :from => "info@ci.appelier.com"
+      
+      def link_to_build(build)
+        @build_url = "http://ci.cloud.polarion.com/builds/#{build.to_param}"
+      end
 
       def build_failed(build, recipients)
         @build = build
@@ -31,9 +35,10 @@ module BigTuna
 
       def build_still_fails(build, recipients)
         @build = build
+        @build_url = link_to_build(build)
         @project = @build.project
-        attachments['cucumber.html'] = File.read(build.output_path('cucumber'))
-        attachments['rspec.html'] = File.read(build.output_path('rspec'))
+        # @cucumber = File.read(build.output_path('cucumber'))
+        # @rspec = File.read(build.output_path('rspec'))
         mail(:to => recipients, :subject => "Build '#{@build.display_name}' in '#{@project.name}' still fails") do |format|
           format.text { render "mailer/build_still_fails" }
         end

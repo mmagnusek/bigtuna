@@ -5,5 +5,10 @@ Hash: <%= @build.display_name %>
 Author: <%= @build.author %> <<%= @build.email %>>
 Message: <%= @build.commit_message %>
 
-Link to build:
-<%#= build_url(@build) %>
+<h2>Link to build:</h2>
+<%= @build_url %>
+
+<h2>Build outputs</h2>
+<div class="build-outputs">
+<%= render_file( @build.output_path('cucumber') )%>
+</div>
