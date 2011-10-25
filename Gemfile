@@ -21,12 +21,14 @@ gem "notifo"
 # campfire notifications
 gem "tinder"
 
+gem "aws-sdk" #AWS SES (mailer)
+gem "nokogiri" # for parsing results into mail
+
 group :development, :test do
   gem "capybara"
   gem "launchy"
   gem "faker"
   gem "machinist"
-  gem "nokogiri"
   gem "mocha"
   gem "database_cleaner"
   gem "crack"

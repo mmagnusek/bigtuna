@@ -19,7 +19,7 @@ module BigTuna
 
     class Sender < ActionMailer::Base
       self.append_view_path("lib/big_tuna/hooks")
-      default :from => "info@ci.appelier.com"
+      default :from => "no-reply@polarion.com"
       
       def link_to_build(build)
         @build_url = "http://ci.cloud.polarion.com/builds/#{build.to_param}"
