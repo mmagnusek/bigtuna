@@ -62,6 +62,7 @@ module BigTuna
         setup_data(build)
         mail(:to => recipients, :subject => "Build '#{@build.display_name}' in '#{@project.name}' still fails") do |format|
           format.html { render "mailer/build_still_fails" }
+        end
       end
       
       def build_fixed(build, recipients)
