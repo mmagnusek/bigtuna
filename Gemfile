@@ -16,7 +16,7 @@ gem "scashin133-xmpp4r-simple", '0.8.9', :require => 'xmpp4r-simple'
 gem "shout-bot"
 
 # notifo notifications
-gem "notifo"
+#gem "notifo"
 
 # campfire notifications
 gem "tinder"

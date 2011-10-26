@@ -1,29 +1,14 @@
-<html>
-<body>
-	<h3>
-		The build for project <%= @project.name %> still fails!
-	</h3>
+<%= content_for :message, "still fails!" %>
+<%= content_for :detail_message, "Commit that didn't fix the build:" %>
 
-	<p>
-		Commit that didn't fix the build: <br/>
-		<b>Hash:</b> <%= @build.display_name %> <br/>
-		<b>Author:</b> <%= @build.author %> <<%= @build.email %>> <br/>
-		<b>Message:</b> <%= @build.commit_message %> <br/>
-	</p>
-
-	<h2>Link to build:</h2>
-	<%= @build_url %>
-
-	<h2>Build outputs</h2>
-	<div class="build-outputs">
-		<h3>RSpec</h3>
-		<div class="rspec">
-		    <%= raw @rspec_output %>
-		</div>
-		<h3>Cucumber</h3>
-		<div class="cucumber">
-		    <%= raw @cucumber_output %>
-		</div>
+<h3>Test results:</h3>
+<div class="build-outputs">
+	<h3>RSpec</h3>
+	<div class="rspec">
+	    <%= raw @rspec_output %>
 	</div>
-</body>
-</html>
+	<h3>Cucumber</h3>
+	<div class="cucumber">
+	    <%= raw @cucumber_output %>
+	</div>
+</div>

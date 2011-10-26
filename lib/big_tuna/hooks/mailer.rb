@@ -54,21 +54,21 @@ module BigTuna
       def build_failed(build, recipients)
         setup_data(build)
         mail(:to => recipients, :subject => "Build '#{@build.display_name}' in '#{@project.name}' failed") do |format|
-          format.html { render "mailer/build_failed" }
+          format.html { render "mailer/build_failed", :layout => 'layout' }
         end     
       end
 
       def build_still_fails(build, recipients)
         setup_data(build)
         mail(:to => recipients, :subject => "Build '#{@build.display_name}' in '#{@project.name}' still fails") do |format|
-          format.html { render "mailer/build_still_fails" }
+          format.html { render "mailer/build_still_fails", :layout => 'layout' }
         end
       end
       
       def build_fixed(build, recipients)
         setup_data(build)
         mail(:to => recipients, :subject => "Build '#{@build.display_name}' in '#{@project.name}' fixed") do |format|
-          format.html { render "mailer/build_fixed" }
+          format.html { render "mailer/build_fixed", :layout => 'layout' }
         end
       end
     end

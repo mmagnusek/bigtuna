@@ -1,0 +1,221 @@
+<html>
+<head>
+	<style>
+		.cucumber, .rspec, .title {
+			background-color: #EDC2C2;
+			border: solid 1px #D32F2F;
+			margin-bottom: 5px;
+		}
+		h3.test-type, .title {
+			padding: 0 10px;
+			color: #994848;
+		}
+		h3.test-type{
+			font-family: "Lucida Grande", Helvetica, sans-serif;
+		}
+		.title.fixed {
+			background-color: #C0EBBC;
+			border: solid 1px #56A134;
+			color: #365E36;
+		}
+		dt.passed { background-color: #C40D0D; color: white;} /* should be turned to failed by missing js */
+		dl {
+		  margin: 0; padding: 0 0 5px;
+		  font-size: 11px;
+		}
+
+		dt {
+		  padding: 3px;
+		  background: #65C400;
+		  color: #fff;
+		  font-weight: bold;
+		}
+
+		dd {
+		  margin: 5px 0 5px 5px;
+		  padding: 3px 3px 3px 18px;
+		}
+		dd.example.failed {
+		  border-left: 5px solid #C20000;
+		  border-bottom: 1px solid #C20000;
+		  color: #C20000; background: #FFFBD3;
+		}
+		/* Ruby code, style similar to vibrant ink */
+		.ruby {
+		  font-size: 12px;
+		  font-family: monospace;
+		  color: white;
+		  background-color: black;
+		  padding: 0.1em 0 0.2em 0;
+		}
+
+		.ruby .keyword { color: #FF6600; }
+		.ruby .constant { color: #339999; }
+		.ruby .attribute { color: white; }
+		.ruby .global { color: white; }
+		.ruby .module { color: white; }
+		.ruby .class { color: white; }
+		.ruby .string { color: #66FF00; }
+		.ruby .ident { color: white; }
+		.ruby .method { color: #FFCC00; }
+		.ruby .number { color: white; }
+		.ruby .char { color: white; }
+		.ruby .comment { color: #9933CC; }
+		.ruby .symbol { color: white; }
+		.ruby .regex { color: #44B4CC; }
+		.ruby .punct { color: white; }
+		.ruby .escape { color: white; }
+		.ruby .interp { color: white; }
+		.ruby .expr { color: white; }
+
+		.ruby .offending { background-color: gray; }
+		.ruby .linenum {
+		  width: 75px;
+		  padding: 0.1em 1em 0.2em 0;
+		  color: #000000;
+		  background-color: #FFFBD3;
+		}
+		.cucumber .scenario {
+		  font: normal 11px "Lucida Grande", Helvetica, sans-serif;
+		  color: black;
+		}
+		.cucumber #cucumber-header, td #cucumber-header, th #cucumber-header {
+		  background: #65c400;
+		  color: white;
+		  height: 6em;
+		}
+		.cucumber #cucumber-header #expand-collapse p, td #cucumber-header #expand-collapse p, th #cucumber-header #expand-collapse p {
+		  float: right;
+		  margin: 0 0 0 10px;
+		}
+		.cucumber .scenario h3 {
+		  font-size: 11px;
+		  padding: 3px;
+		  margin: 0;
+		  background: #65c400;
+		  color: white;
+		  font-weight: bold;
+		}
+		.cucumber h1, td h1, th h1 {
+		  margin: 0px 10px 0px 10px;
+		  padding: 10px;
+		  font-family: "Lucida Grande", Helvetica, sans-serif;
+		  font-size: 2em;
+		  position: absolute;
+		}
+		.cucumber h4, td h4, th h4 {
+		  margin-bottom: 2px;
+		}
+		.cucumber div.feature, td div.feature, th div.feature {
+		  padding: 2px;
+		  margin: 0px 10px 5px 10px;
+		}
+		.cucumber div.examples, td div.examples, th div.examples {
+		  padding: 0em 0em 0em 1em;
+		}
+		.cucumber table td.message, td table td.message, th table td.message {
+		  border-left: 5px solid aqua;
+		  border-bottom: 1px solid aqua;
+		  background: #e0ffff;
+		  color: #001111;
+		}
+		.cucumber ol, td ol, th ol {
+		  list-style: none;
+		  margin: 0px;
+		  padding: 0px;
+		}
+		.cucumber ol li.step, td ol li.step, th ol li.step {
+		  padding: 3px 3px 3px 18px;
+		  margin: 5px 0px 5px 5px;
+		}
+		.cucumber ol li, td ol li, th ol li {
+		  margin: 0em 0em 0em 1em;
+		  padding: 0em 0em 0em 0.2em;
+		}
+		.cucumber ol li span.param, td ol li span.param, th ol li span.param {
+		  font-weight: bold;
+		}
+		.cucumber ol li.failed, td ol li.failed, th ol li.failed {
+		  border-left: 5px solid #c20000;
+		  border-bottom: 1px solid #c20000;
+		  background: #fffbd3;
+		  color: #c20000;
+		}
+		.cucumber ol li.passed, td ol li.passed, th ol li.passed {
+		  border-left: 5px solid #65c400;
+		  border-bottom: 1px solid #65c400;
+		  background: #dbffb4;
+		  color: #3d7700;
+		}
+		.cucumber ol li.skipped, td ol li.skipped, th ol li.skipped {
+		  border-left: 5px solid aqua;
+		  border-bottom: 1px solid aqua;
+		  background: #e0ffff;
+		  color: #001111;
+		}
+		.cucumber ol li.pending, td ol li.pending, th ol li.pending {
+		  border-left: 5px solid #faf834;
+		  border-bottom: 1px solid #faf834;
+		  background: #fcfb98;
+		  color: #131313;
+		}
+		.cucumber ol li.undefined, td ol li.undefined, th ol li.undefined {
+		  border-left: 5px solid #faf834;
+		  border-bottom: 1px solid #faf834;
+		  background: #fcfb98;
+		  color: #131313;
+		}
+		.cucumber ol li.message, td ol li.message, th ol li.message {
+		  border-left: 5px solid aqua;
+		  border-bottom: 1px solid aqua;
+		  background: #e0ffff;
+		  color: #001111;
+		  margin-left: 10px;
+		}
+		.cucumber .step_name, td .step_name, th .step_name {
+		  float: left;
+		}
+		.cucumber .step_file, td .step_file, th .step_file {
+		  text-align: right;
+		  color: #999999;
+		}
+		.cucumber .step_file a, td .step_file a, th .step_file a {
+		  color: #999999;
+		}
+		.cucumber .scenario_file, td .scenario_file, th .scenario_file {
+		  float: right;
+		  color: #999999;
+		}
+		.cucumber .tag, td .tag, th .tag {
+		  font-weight: bold;
+		  color: #246ac1;
+		}
+		.cucumber .backtrace, td .backtrace, th .backtrace {
+		  margin-top: 0;
+		  margin-bottom: 0;
+		  margin-left: 1em;
+		  color: black;
+		}
+		.cucumber > .scenario > h3 {
+			background: #C40D0D;
+		}
+	</style>
+</head>
+<body>
+	<h2 class="title <%= @status_class %>">
+		The build for project <%= @project.name %> <%= yield :message %>
+	</h2>
+	<p>
+		<%= yield :detail_message %> <br/>
+		<b>Hash:</b> <%= @build.display_name %> <br/>
+		<b>Author:</b> <%= @build.author %> <<%= @build.email %>> <br/>
+		<b>Message:</b> <%= @build.commit_message %> <br/>
+	</p>
+		
+	<h3>Link to build:</h3>
+	<%= @build_url %>
+
+	<%= yield %>
+	
+</body>
+</html>

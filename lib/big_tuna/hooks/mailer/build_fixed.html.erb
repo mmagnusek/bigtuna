@@ -1,17 +1,3 @@
-<html>
-<body>
-	<h3>
-		The build for project <%= @project.name %> is now fixed!
-	</h3>
-
-	<p>
-		Commit that fixed the build: <br/>
-		<b>Hash:</b> <%= @build.display_name %> <br/>
-		<b>Author:</b> <%= @build.author %> <<%= @build.email %>> <br/>
-		<b>Message:</b> <%= @build.commit_message %> <br/>
-	</p>
-
-	<h2>Link to build:</h2>
-	<%= @build_url %>
-</body>
-</html>
+<% @status_class = 'fixed' %>
+<%= content_for :message, "is now fixed!" %>
+<%= content_for :detail_message, "Commit that fixed the build:" %>
