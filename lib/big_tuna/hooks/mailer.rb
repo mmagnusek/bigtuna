@@ -69,7 +69,13 @@ module BigTuna
       def failed_html_results(doc, failure_selector)
         output = ""
         added = []
-        output << doc.css("#summary").to_s
+        # summary
+        output << "<p>"
+        output << doc.css("script")[-2..-2].text.match(/\"[^\"]*\"/).to_s
+        output << "<br />"
+        output << doc.css("script")[-1..-1].text.match(/\"[^\"]*\"/).to_s
+        output << "</p>"
+        # failures
         doc.css(failure_selector).each do |step|
           container = step.parent.parent
           unless added.include?(container)
